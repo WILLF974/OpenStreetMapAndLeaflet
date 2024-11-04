@@ -1,0 +1,136 @@
+Pour créer un cluster de marqueurs avec Leaflet en JavaScript, vous aurez besoin de la bibliothèque `leaflet.markercluster`, qui permet de regrouper les marqueurs proches les uns des autres en clusters. Voici un guide étape par étape pour coder un cluster de marqueurs pour Leaflet :
+
+### Étape 1 : Inclure les bibliothèques nécessaires
+
+Tout d'abord, assurez-vous d'inclure Leaflet et Leaflet MarkerCluster dans votre projet. Vous pouvez les inclure via des CDN ou les installer via npm si vous utilisez un gestionnaire de paquets.
+
+#### Via CDN :
+Ajoutez les lignes suivantes dans la section `<head>` de votre HTML :
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet MarkerCluster Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+</head>
+<body>
+    <div id="map" style="height: 600px;"></div>
+
+    <script>
+        // Code JavaScript ici
+    </script>
+</body>
+</html>
+```
+
+### Étape 2 : Initialiser la carte Leaflet
+
+Dans la section `<script>` de votre HTML, initialisez la carte Leaflet :
+
+```javascript
+var map = L.map('map').setView([48.8566, 2.3522], 13); // Centré sur Paris
+
+// Ajouter une couche de tuiles (par exemple OpenStreetMap)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+```
+
+### Étape 3 : Initialiser le cluster de marqueurs
+
+Ensuite, créez un groupe de clusters de marqueurs :
+
+```javascript
+var markers = L.markerClusterGroup();
+```
+
+### Étape 4 : Ajouter des marqueurs au cluster
+
+Ajoutez des marqueurs individuels au cluster. Voici un exemple avec quelques coordonnées de marqueurs :
+
+```javascript
+var marker1 = L.marker([48.8566, 2.3522]).bindPopup('Paris');
+var marker2 = L.marker([48.8584, 2.2945]).bindPopup('Tour Eiffel');
+var marker3 = L.marker([48.8529, 2.3499]).bindPopup('Notre-Dame');
+var marker4 = L.marker([48.8606, 2.3376]).bindPopup('Louvre');
+
+markers.addLayer(marker1);
+markers.addLayer(marker2);
+markers.addLayer(marker3);
+markers.addLayer(marker4);
+```
+
+### Étape 5 : Ajouter le cluster de marqueurs à la carte
+
+Enfin, ajoutez le groupe de clusters de marqueurs à la carte :
+
+```javascript
+map.addLayer(markers);
+```
+
+### Code complet
+
+Voici le code complet pour créer une carte avec des clusters de marqueurs :
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet MarkerCluster Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+</head>
+<body>
+    <div id="map" style="height: 600px;"></div>
+
+    <script>
+        var map = L.map('map').setView([48.8566, 2.3522], 13); // Centré sur Paris
+
+        // Ajouter une couche de tuiles (par exemple OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var markers = L.markerClusterGroup();
+
+        var marker1 = L.marker([48.8566, 2.3522]).bindPopup('Paris');
+        var marker2 = L.marker([48.8584, 2.2945]).bindPopup('Tour Eiffel');
+        var marker3 = L.marker([48.8529, 2.3499]).bindPopup('Notre-Dame');
+        var marker4 = L.marker([48.8606, 2.3376]).bindPopup('Louvre');
+
+        markers.addLayer(marker1);
+        markers.addLayer(marker2);
+        markers.addLayer(marker3);
+        markers.addLayer(marker4);
+
+        map.addLayer(markers);
+    </script>
+</body>
+</html>
+```
+
+Avec ce code, vous devriez obtenir une carte Leaflet avec des marqueurs groupés en clusters. Vous pouvez ajouter autant de marqueurs que vous le souhaitez au groupe de clusters en suivant le même modèle.
